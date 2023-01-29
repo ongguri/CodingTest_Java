@@ -10,9 +10,10 @@ class Solution {
             if(n % num == 0) {
                 numList.add(num);
                 n /= num;
-                continue;
             }
-            num++;
+            else {
+                num++;
+            }
         }
         ArrayList<Integer> answer = new ArrayList<>(numList);
         Collections.sort(answer);
