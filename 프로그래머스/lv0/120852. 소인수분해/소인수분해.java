@@ -10,7 +10,6 @@ class Solution {
             if(n % num == 0) {
                 numList.add(num);
                 n /= num;
-                num = 2;
                 continue;
             }
             num++;
