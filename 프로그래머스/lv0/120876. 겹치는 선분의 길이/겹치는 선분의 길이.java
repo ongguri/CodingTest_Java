@@ -1,18 +1,26 @@
+import java.util.*;
+
 class Solution {
     public int solution(int[][] lines) {
+        Map<Integer, Integer> dict = new HashMap<>();
+
+        for (int i = 0; i < lines.length; i++) {
+            int min = Math.min(lines[i][0], lines[i][1]);
+            int max = Math.max(lines[i][0], lines[i][1]);
+
+            for (int j=min; j<max; j++) {
+                dict.put(j, dict.getOrDefault(j, 0) + 1);
+            }
+        }
+
         int answer = 0;
-        int min = Math.min(Math.min(lines[0][0], lines[1][0]), lines[2][0]);
-        int max = Math.max(Math.max(lines[0][1], lines[1][1]), lines[2][1]);
-        
-        for(int i = min; i < max; i++) {
-            int count = 0;
-            if(lines[0][0] <= i && lines[0][1] >= i+1) { count++; }
-            if(lines[1][0] <= i && lines[1][1] >= i+1) { count++; }
-            if(lines[2][0] <= i && lines[2][1] >= i+1) { count++; }
-            if(count >= 2) {
+
+        for (Map.Entry<Integer, Integer> entry : dict.entrySet()) {
+            if (entry.getValue() >= 2) {
                 answer++;
             }
         }
+
         return answer;
     }
 }
