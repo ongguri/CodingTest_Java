@@ -1,14 +1,13 @@
 class Solution {
     public int solution(String before, String after) {
-        int answer = 0;
-        String[] beforeList = before.split("");
+        char str1 = 0;
+        char str2 = 0;
         
-        for(String str : beforeList) {
-            if(after.contains(str)) {
-                after = after.replaceFirst(str, "");
-            }
+        for(int c = 0; c < before.length(); c++) {
+            str1 += before.charAt(c);
+            str2 += after.charAt(c);
         }
-        if(after.length() == 0) { answer = 1; }
-        return answer;
+        
+        return (str1-str2 == 0) ? 1 : 0;
     }
 }
