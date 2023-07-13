@@ -1,11 +1,14 @@
 class Solution {
     public int solution(int[] array) {
-        String answer = "";
-        
-        for(int arr : array) {
-            answer += Integer.valueOf(arr);
+        int answer = 0;
+        for(int a : array){
+            while(a != 0){
+                if(a % 10 == 7){
+                    answer++;
+                }
+                a /= 10;
+            }
         }
-        
-        return answer.length() - answer.replace("7", "").length();
+        return answer;
     }
 }
