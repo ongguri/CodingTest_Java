@@ -1,29 +1,15 @@
-import java.util.ArrayList;
-
 class Solution {
     public String[] solution(String my_str, int n) {
-        ArrayList<String> strArr = new ArrayList<String>();
+        String[] answer = new String[(my_str.length() + n - 1) / n];
         
-        int count = 0;
-        String str = "";
-        for(int i = 0; i < my_str.length(); i++) {
-            count++;
-            str += my_str.substring(i, i+1);
-            if(count == n) {
-                strArr.add(str);
-                count = 0;
-                str = "";
+        for(int i = 0; i < answer.length; i++) {
+            if(i+1 == answer.length) {
+                answer[i] = my_str.substring(i*n, my_str.length());
+            }
+            else {
+                answer[i] = my_str.substring(i*n, (i+1)*n);
             }
         }
-        if(count != 0) {
-            strArr.add(str);
-        }
-        
-        String[] answer = new String[strArr.size()];
-        for(int i = 0; i < answer.length; i++) {
-            answer[i] = strArr.get(i);
-        }
-        
         return answer;
     }
 }
