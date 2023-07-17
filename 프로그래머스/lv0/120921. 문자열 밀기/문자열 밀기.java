@@ -1,7 +1,6 @@
 class Solution {
     public int solution(String A, String B) {
         int answer = 0;
-        // if(A.equals(B)) { return answer; }
         
         int lenA = A.length();
         while(!A.equals(B)) {
@@ -11,7 +10,7 @@ class Solution {
             }
             String strA = String.join("", arrA);
             A = strA;
-            System.out.println(strA);
+            // System.out.println(strA);
             answer++;
             if(strA.equals(B)) {
                 break;
@@ -21,6 +20,9 @@ class Solution {
                 break;
             }
         }
+        // if(lenA/2 < answer) {
+        //     answer = lenA - answer;
+        // }
         return answer;
     }
 }
