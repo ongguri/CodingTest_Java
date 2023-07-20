@@ -1,20 +1,20 @@
-import java.util.Set;
-import java.util.LinkedHashSet;
-import java.util.Iterator;
+import java.util.ArrayList;
 
 class Solution {
     public int[] solution(int[] arr, int k) {
         int[] answer = new int[k];
         
-        Set<Integer> arrSet = new LinkedHashSet<Integer>();
+        ArrayList<Integer> arrList = new ArrayList<Integer>();
         for(int num : arr) {
-            arrSet.add(num);
+            if(!arrList.contains(num)) {
+                arrList.add(num);
+            }
         }
         
-        Iterator<Integer> arrIterSet = arrSet.iterator();
-        for(int i = 0; i < answer.length; i++) {
-            answer[i] = (arrIterSet.hasNext()) ? arrIterSet.next() : -1;
+        for(int i = 0; i < k; i++) {
+            answer[i] = (i < arrList.size()) ? arrList.get(i) : -1;
         }
+        
         return answer;
     }
 }
