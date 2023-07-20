@@ -1,26 +1,19 @@
 import java.util.ArrayList;
 
 class Solution {
+
     public int[] solution(String myString) {
-        int count = 0;
-        ArrayList<Integer> result = new ArrayList<Integer>();
-        
-        for(int i = 0; i < myString.length(); i++) {
-            if(myString.charAt(i) == 'x') {
-                result.add(count);
-                count = 0;
-                continue;
-            }
-            count++;
+        ArrayList<Integer> list = new ArrayList<>();
+        String[] tmp = myString.split("x");
+        for (int i = 0; i < tmp.length; i++) {
+            list.add(tmp[i].length());
         }
-        
-        if(myString.charAt(myString.length() - 1) == 'x' || count != 0) {
-            result.add(count);
+        if(myString.endsWith("x")) {
+            list.add(0);
         }
-        
-        int[] answer = new int[result.size()];
-        for(int i = 0; i < answer.length; i++) {
-            answer[i] = result.get(i);
+        int[] answer = new int[list.size()];
+        for (int i = 0; i < answer.length; i++) {
+            answer[i] = list.get(i);
         }
         return answer;
     }
