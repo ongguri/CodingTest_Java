@@ -2,18 +2,16 @@ import java.util.Arrays;
 
 class Solution {
     public int[] solution(int[] arr, int[] query) {
-        int[] answer = arr.clone();
+        int pl = 0, pr = 0;
         
         for(int i = 0; i < query.length; i++) {
             if(i % 2 == 0) {
-                // 0 ~ query[i]+1
-                answer = Arrays.copyOfRange(answer, 0, query[i]+1);
+                pr = pl + query[i];
             }
             else if(i % 2 != 0) {
-                // query[i] ~ answer.length
-                answer = Arrays.copyOfRange(answer, query[i], answer.length);
+                pl += query[i];
             }
         }
-        return answer;
+        return Arrays.copyOfRange(arr, pl, pr+1);
     }
 }
