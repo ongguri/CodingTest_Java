@@ -3,19 +3,14 @@ import java.util.HashMap;
 
 class Solution {
     public String solution(String my_string, int[] indices) {
-        StringBuilder sb = new StringBuilder();
-        HashMap<Integer, Integer> indicesMap = new HashMap<Integer, Integer>();
+        String answer = "";
+        String[] my_string_arr = my_string.split("");
         
         for(int ind : indices) {
-            indicesMap.put(ind, 0);
+            my_string_arr[ind] = "";
         }
         
-        for(int i = 0; i < my_string.length(); i++) {
-            if(indicesMap.get(i) == null) {
-                sb.append(my_string.charAt(i));
-            }
-        }
-        
-        return sb.toString();
+        answer = String.join("", my_string_arr);
+        return answer;
     }
 }
