@@ -8,18 +8,10 @@ class Solution {
                 answer.append(" ");
             }
             else if(Character.isUpperCase(s.charAt(i))) {
-                if(alpha+n > 'Z') {
-                    answer.append((char)(alpha + n - 26));
-                    continue;
-                }
-                answer.append((char)(alpha + n));
+                answer.append((char)((alpha - 'A' + n) % 26 + 'A'));
             }
             else if(!Character.isUpperCase(s.charAt(i))) {
-                if(alpha+n > 'z') {
-                    answer.append((char)(alpha + n - 26));
-                    continue;
-                }
-                answer.append((char)(alpha + n));
+                answer.append((char)((alpha - 'a' + n) % 26 + 'a'));
             }
         }
         return answer.toString();
