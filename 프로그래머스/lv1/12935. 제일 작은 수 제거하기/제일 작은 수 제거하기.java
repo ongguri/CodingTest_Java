@@ -1,9 +1,8 @@
+import java.util.Arrays;
+
 class Solution {
     public int[] solution(int[] arr) {
-        int minNum = arr[0];
-        for(int num : arr) {
-            minNum = Math.min(minNum, num);
-        }
+        int minNum = Arrays.stream(arr).min().getAsInt();
         
         int[] answer = new int[arr.length-1];
         int idx = 0;
@@ -13,10 +12,6 @@ class Solution {
             }
         }
         
-        if(answer.length == 0) {
-            answer = new int[1];
-            answer[0] = -1;
-        }
-        return answer;
+        return (answer.length != 0) ? answer : new int[]{-1};
     }
 }
