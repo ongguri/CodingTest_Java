@@ -20,5 +20,5 @@ class Solution {
             answer = ret.toString();
         }
         return answer;
-    }
+    }  // boolean으로 한 것과 int로 한 것 중 뭐가 더 속도가 빠른지 체크
 }
