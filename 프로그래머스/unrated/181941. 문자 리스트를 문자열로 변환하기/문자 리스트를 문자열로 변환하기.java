@@ -6,6 +6,6 @@ class Solution {
             answer.append(str);
         }
         
-        return answer.toString();
+        return answer.toString();  // 이게 더 빠름
     }
 }
