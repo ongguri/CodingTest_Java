@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Arrays;
 
 class Solution {
     public int[] solution(int[] answers) {
@@ -11,10 +12,10 @@ class Solution {
                               studentScoring(answers, student3)};
     
         // 첫번째 방법
-        int maxScore = Math.max(studentScore[0], Math.max(studentScore[1], studentScore[2]));
+        // int maxScore = Math.max(studentScore[0], Math.max(studentScore[1], studentScore[2]));
         
         // 두번째 방법
-        // int maxScore = Arrays.stream(studentScore).max().getAsInt();
+        int maxScore = Arrays.stream(studentScore).max().getAsInt();
         
         ArrayList<Integer> studentResult = new ArrayList<Integer>();
         for(int s = 0; s < 3; s++) {
