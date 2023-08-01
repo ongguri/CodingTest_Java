@@ -1,65 +1,51 @@
 import java.util.HashMap;
-import java.util.Arrays;
 
 class Solution {
     public String solution(int[] numbers, String hand) {
         StringBuilder answer = new StringBuilder();
-        int[] leftHandLoc = {0, 0}, rightHandLoc = {2, 0};
+        int[][] leftRightHand = {{0, 0}, {2, 0}};
         int[][] keyPadLoc = {{1, 0}, {0, 3}, {1, 3}, {2, 3},
                                    {0, 2}, {1, 2}, {2, 2},
                                    {0, 1}, {1, 1}, {2, 1}};
         
-        // HashMap<Integer, Integer[]> keyPadMap = new HashMap<Integer, Integer[]>();
-        // keyPadMap.put(0, new Integer[]{1, 0});
-        // int y = 3;
-        // for(int i = 0; i < 9; i++) {
-        //     keyPadMap.put(i+1, new Integer[]{i % 3, y});
-        //     if(i % 3 == 2) { y--; }
-        // }  // 키패드 좌표값
-        
         for(int number : numbers) {
-            if(number == 1 || number == 4 || number == 7) {
-                answer.append("L");
-                leftHandLoc = keyPadLoc[number];
-            }
-            else if(number == 3 || number == 6 || number == 9) {
-                answer.append("R");
-                rightHandLoc = keyPadLoc[number];
-            }
-            else {
-                double leftHandDist = Math.ceil(
-                    Math.sqrt(
-                        Math.pow(keyPadLoc[number][0] - leftHandLoc[0], 2) +
-                        Math.pow(keyPadLoc[number][1] - leftHandLoc[1], 2)
-                    ));
-                
-                double rightHandDist = Math.ceil(
-                    Math.sqrt(
-                        Math.pow(keyPadLoc[number][0] - rightHandLoc[0], 2) +
-                        Math.pow(keyPadLoc[number][1] - rightHandLoc[1], 2)
-                    ));
-                
-                if(leftHandDist < rightHandDist) {
-                    answer.append("L");
-                    leftHandLoc = keyPadLoc[number];
-                }
-                else if(leftHandDist > rightHandDist) {
-                    answer.append("R");
-                    rightHandLoc = keyPadLoc[number];
-                }
-                else {
-                    if(hand.equals("left")) {
-                        answer.append("L");
-                        leftHandLoc = keyPadLoc[number];
-                    }
-                    else if(hand.equals("right")) {
-                        answer.append("R");
-                        rightHandLoc = keyPadLoc[number];
-                    }
-                }
-            }
+            String touchHand = touchKeyPad(keyPadLoc, leftRightHand, number, hand);
+            answer.append(touchHand);
+            
+            if(touchHand.equals("L")) { leftRightHand[0] = keyPadLoc[number]; }
+            else if(touchHand.equals("R")) { leftRightHand[1] = keyPadLoc[number]; }
         }
         
         return answer.toString();
+    }
+    
+    public String touchKeyPad(int[][] keyPadLoc, int[][] leftRightHand, int number, String hand) {
+        String touchHand = "";
+        
+        if(number == 1 || number == 4 || number == 7) {
+            touchHand = "L";
+        }
+        else if(number == 3 || number == 6 || number == 9) {
+            touchHand = "R";
+        }
+        else {
+            double leftHandDist = keyPadDistance(keyPadLoc, leftRightHand[0], number);
+            double rightHandDist = keyPadDistance(keyPadLoc, leftRightHand[1], number);
+            touchHand = (leftHandDist < rightHandDist) ? "L" : "R";
+            
+            if(leftHandDist == rightHandDist) {
+                touchHand = (hand.equals("left")) ? "L" : "R";
+            }
+        }
+        
+        return touchHand;
+    }
+    
+    public double keyPadDistance(int[][] keyPadLoc, int[] handLoc, int number) {
+        return Math.ceil(
+            Math.sqrt(
+                Math.pow(keyPadLoc[number][0] - handLoc[0], 2) +
+                Math.pow(keyPadLoc[number][1] - handLoc[1], 2)
+            ));
     }
 }
