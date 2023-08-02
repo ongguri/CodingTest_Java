@@ -55,7 +55,7 @@ class Solution {
         String result;
         
         for(int s = 0; s < new_id.length(); s++) {
-            if(new_id.substring(s, s+1).matches("[-|_|.a-z0-9]")) {
+            if(new_id.substring(s, s+1).matches("[-_.a-z0-9]")) {
                 sb.append(new_id.charAt(s));
             }
         }
@@ -71,19 +71,10 @@ class Solution {
     }
     
     public String firstOrEndDotRemove(String new_id, StringBuilder sb) {
-        String result;
+        new_id = new_id.replaceAll("^[.]", "");
+        new_id = new_id.replaceAll("[.]$", "");
         
-        for(int s = 0; s < new_id.length(); s++) {
-            if((s == 0 || s == new_id.length()-1) && new_id.charAt(s) == '.') {
-                continue;
-            }
-            sb.append(new_id.charAt(s));
-        }
-        
-        result = sb.toString();
-        sb.setLength(0);
-        
-        return result;
+        return new_id;
     }
     
     public String isEmptyStringAddA(String new_id) {
