@@ -11,7 +11,7 @@ class Solution {
             xMap.put(X.charAt(m), xMap.getOrDefault(X.charAt(m), 0) + 1);
         }
         // System.out.println(xMap);
-        
+
         for(int i = 0; i < Y.length(); i++) {
             char ch = Y.charAt(i);
             if(xMap.get(ch) != null && xMap.get(ch) != 0) {
@@ -22,7 +22,7 @@ class Solution {
         // System.out.println(xMap);
         // System.out.println(numList);
         Collections.sort(numList);
-        
+
         for(int i = numList.size()-1; i >= 0; i--) {
             answer.append(numList.get(i));
             if(i == numList.size()-1 && numList.get(i) == '0') {
@@ -32,7 +32,7 @@ class Solution {
         if(answer.length() == 0) {
             answer.append("-1");
         }
-        
+
         return answer.toString();
     }
-}
+}  // 아슬아슬하게 통과
