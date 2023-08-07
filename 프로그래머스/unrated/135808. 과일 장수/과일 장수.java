@@ -5,13 +5,9 @@ class Solution {
         int answer = 0;
         Arrays.sort(score);
         
-        int count = 0;
-        for(int s = score.length-1; s >= 0; s--) {
-            count++;
-            if(count == m) {
-                answer += score[s] * m;
-                count = 0;
-            }
+        for(int s = score.length; s >= m; s -= m) {
+            answer += score[s-m] * m;
+
         }
         return answer;
     }
