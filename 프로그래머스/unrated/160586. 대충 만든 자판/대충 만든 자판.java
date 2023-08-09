@@ -1,7 +1,6 @@
 class Solution {
     public int[] solution(String[] keymap, String[] targets) {
         int[] answer = new int[targets.length];
-        StringBuilder makeTargetSb = new StringBuilder();
         
         int answerIdx = 0;
         for(String target : targets) {
@@ -12,26 +11,19 @@ class Solution {
                 char targetChar = target.charAt(s);
                 int minCount = 1000;  // 대충 큰 값으로 초기화
                 for(String key : keymap) {
-                    // 만약 키 안에 가져온 문자가 없으면
-                    if(key.indexOf(targetChar) == -1) { 
-                        continue; 
-                    } // pass
-                    else if(key.indexOf(targetChar) != -1) { // 키 안에 문자가 있으면,
+                    // 만약 키 안에 가져온 문자가 있으면
+                    if(key.indexOf(targetChar) != -1) { 
                         minCount = Math.min(minCount, key.indexOf(targetChar)+1);
-                    }   
+                    }
                 }
-                if(minCount != 1000) { 
-                    makeTargetSb.append(targetChar);
-                    touchCount += minCount; 
+                if(minCount != 1000) { touchCount += minCount; }
+                else {  // 만들 수 없는 타겟
+                    touchCount = 0;
+                    break;
                 }
             }
-            if(makeTargetSb.toString().equals(target) && touchCount != 0) {
-                answer[answerIdx++] = touchCount;
-            }
-            else {
-                answer[answerIdx++] = -1;
-            }
-            makeTargetSb.setLength(0);
+            
+            answer[answerIdx++] = (touchCount != 0) ? touchCount : -1;
         }
         
         return answer;
