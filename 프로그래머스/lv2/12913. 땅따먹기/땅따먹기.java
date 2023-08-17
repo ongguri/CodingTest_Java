@@ -1,14 +1,30 @@
+import java.util.Arrays;
+
 class Solution {
     int solution(int[][] land) {
-        int len = land.length-1;
+        int answer = 0;
+        int landLen = land[0].length;
+
+        int x = 1, landIdx = 0;
+        while(x < land.length) {
+            int maxScore = 0;
+            for(int l = 0; l < landLen; l++) {
+                if(l != landIdx) {
+                    maxScore = Math.max(maxScore, land[x-1][l]);
+                }
+            }
+            land[x][landIdx++] += maxScore;
+            
+            if(landIdx == landLen) {
+                landIdx = 0;
+                x++;
+            }
+        }
         
-        for(int l = 1; l < land.length; l++) {
-            land[l][0] += Math.max(land[l-1][1], Math.max(land[l-1][2], land[l-1][3]));
-            land[l][1] += Math.max(land[l-1][0], Math.max(land[l-1][2], land[l-1][3]));
-            land[l][2] += Math.max(land[l-1][0], Math.max(land[l-1][1], land[l-1][3]));
-            land[l][3] += Math.max(land[l-1][0], Math.max(land[l-1][1], land[l-1][2]));
+        for(int i = 0; i < landLen; i++) {
+            answer = Math.max(answer, land[land.length-1][i]);
         }
 
-        return Math.max(land[len][0], Math.max(land[len][1], Math.max(land[len][2], land[len][3])));
+        return answer;
     }
 }
