@@ -1,7 +1,6 @@
 class Solution {
     public int solution(int n) {
-        String nBin = Integer.toBinaryString(n);
-        int len = countOne(nBin);
+        int len = countOne(Integer.toBinaryString(n));
         
         while(countOne(Integer.toBinaryString(++n)) != len) {
         }
