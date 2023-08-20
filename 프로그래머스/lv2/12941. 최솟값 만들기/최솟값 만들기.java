@@ -14,42 +14,35 @@ class Solution {
     }
     
     public static void quickSort(int[] arr, int start, int end) {
-    if (start >= end) {
-        return;
-    }
-    
-    int pivot = partition(arr, start, end);
-    quickSort(arr, start, pivot - 1);
-    quickSort(arr, pivot + 1, end);
-}
+        if(start >= end) { return; }
+        int pivot = start;
+        int left = start+1;
+        int right = end;
 
-private static int partition(int[] arr, int start, int end) {
-    int pivot = start;
-    int left = start + 1;
-    int right = end;
-    
-    while (left <= right) {
-        while (left <= right && arr[left] <= arr[pivot]) {
-            left++;
-        }
-        while (right > start && arr[right] >= arr[pivot]) {
-            right--;
-        }
-        
-        if (left > right) {
-            swap(arr, pivot, right);
-        } else {
-            swap(arr, left, right);
-        }
-    }
-    
-    return right;
-}
+        while(left <= right) {
+            while(left <= right && arr[left] <= arr[pivot]) {
+                left++;
+            }
+            while(right > start && arr[right] >= arr[pivot]) {
+                right--;
+            }
 
-private static void swap(int[] arr, int i, int j) {
-    int temp = arr[i];
-    arr[i] = arr[j];
-    arr[j] = temp;
-}
+            if(left > right) {
+                swap(arr, pivot, right);
+            }
+            else {
+                swap(arr, left, right);
+            }
+        }
+
+        quickSort(arr, start, right-1);
+        quickSort(arr, right+1, end);
+    }
+
+    public static void swap(int[] arr, int idx1, int idx2) {
+        int tmp = arr[idx1];
+        arr[idx1] = arr[idx2];
+        arr[idx2] = tmp;
+    }
 
 }
