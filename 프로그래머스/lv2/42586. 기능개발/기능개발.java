@@ -7,11 +7,8 @@ class Solution {
         int day = 0;
         int deploy = 1;
         for(int i = 0; i < progresses.length; i++) {
-            int completeDay = 0;
-            while(progresses[i] < 100) {
-                completeDay++;
-                progresses[i] += speeds[i];
-            }
+            double remain = (100 - progresses[i]) / (double)speeds[i];
+            int completeDay = (int)Math.ceil(remain);
             
             if(day < completeDay) {
                 deployList.add(deploy);
