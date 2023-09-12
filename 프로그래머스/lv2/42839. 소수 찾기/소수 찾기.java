@@ -1,4 +1,5 @@
-import java.util.HashMap;
+import java.util.Set;
+import java.util.HashSet;
 
 class Solution {
     public int solution(String numbers) {
@@ -6,17 +7,17 @@ class Solution {
         String[] strNumbers = numbers.split("");
         String[] output = new String[strNumbers.length];
         boolean[] visited = new boolean[strNumbers.length];
-        HashMap<Integer, Integer> sosu = new HashMap<>();
+        Set<Integer> numSet = new HashSet<Integer>();
         
         for(int i = 1; i <= numbers.length(); i++) {
-            permutation(strNumbers, output, visited, 0, i, sosu);
+            permutation(strNumbers, output, visited, 0, i, numSet);
         }
-        // System.out.println(sosu);
+        // System.out.println(numSet);
         
-        return sosu.size();
+        return numSet.size();
     }
     
-    public static void permutation(String[] strNumbers, String[] output, boolean[] visited, int depth, int count, HashMap<Integer, Integer> sosu) {
+    public static void permutation(String[] strNumbers, String[] output, boolean[] visited, int depth, int count, Set<Integer> numSet) {
         if(depth == count) {
             StringBuilder str = new StringBuilder();
             for(int i = 0; i < depth; i++) {
@@ -25,10 +26,7 @@ class Solution {
             }
             int num = Integer.parseInt(str.toString());
             if(num == 0 || num == 1) { return; }
-            if(sosu.get(num) == null) {
-                if(isSosu(num)) { sosu.put(num, 0); }
-            }
-            // System.out.println();
+            if(isSosu(num)) { numSet.add(num); }
             str.setLength(0);
             
             return;
@@ -38,7 +36,7 @@ class Solution {
             if(!visited[i]) {
                 visited[i] = true;
                 output[depth] = strNumbers[i];
-                permutation(strNumbers, output, visited, depth+1, count, sosu);
+                permutation(strNumbers, output, visited, depth+1, count, numSet);
                 visited[i] = false;
             }
         }
